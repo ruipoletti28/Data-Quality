@@ -11,20 +11,19 @@
 </head>
 
 <body>
-    <form>    
-        <div id="botaoArquivo">
-            <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV)</label>
-                <input type="file"
-                id="arquivo" 
-                name="arquivo"
-                accept=".csv, .xlsx, .xls" 
-                multiple>
-        </div>
-
-        <div class="visualizacao">
-            
-        </div>
-    </form>
+    <div class="visualizacao"></div>
+        <form>    
+            <div id="botaoArquivo">
+                <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
+                    <input type="file"
+                    id="arquivo" 
+                    name="arquivo"
+                    accept=".csv, .xlsx, .xls" 
+                    multiple>
+            </div>
+        </form>
+    </div>
+        
 
     <p align="left" id="demo1"></p>
 
@@ -35,7 +34,7 @@
     <p align="left" id="demo4"></p>
 
     <h3> Formato de saída:
-    <select id="formatoSaida" onchange="mostrarValor()">
+    <select id="formatoSaida" >
         <option value="null"></option>
         <option value="xlsx">.xlsx</option>  
         <option value="xls">.xls</option>    
@@ -49,12 +48,14 @@
     </legend>
 
     <legend id="checkBoxCripto" align="left">
-        Enviar por e-mail a criptografia e/ou arquivo? Sim <input type="checkbox" id="emailNao" name="emailNao" value="emailNao">
-        Apenas a chave de criptografia <input type="checkbox" id="emailChaveCriptoSim" name="emailChaveCriptoSim" value="emailChaveCriptoSim">
+        Enviar por e-mail a criptografia e/ou arquivo? 
+            <br> <input type="radio" id="emailNao" name="emailNao" value="emailNao"> Sim 
+                <input type="radio" id="emailChaveCriptoSim" name="emailNao" value="emailChaveCriptoSim"> Apenas a chave de criptografia 
+                    <input type="radio" id="nenhumaOpcao" name="emailNao" value="nenhum">Nenhuma opção 
     </legend>
 
     <button id="enviar">
-        Enviar
+        Enviar para tratamento
     </button>
 
     <div id="popups" class="popup">

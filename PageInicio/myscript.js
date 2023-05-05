@@ -1,20 +1,20 @@
-import functionB from './ClasseB.js';
-const preview = document.querySelector('.visualizacao');
-const input = document.querySelector('input');
-const CriptoSim = document.querySelectorAll('input[type="checkbox"]');
-const popup = document.querySelector('.popup');
-const btn1 = document.querySelector('.btnLer');
-var arquivo = document.getElementById("arquivo").files[0];
+//import functionB from './ClasseB.js';
+import pegarValorCripto from './criptoPlanilha.js';
+import pegarValorSaida from './saidaPlanilha.js';
+const preview = document.querySelector('.visualizacao'); //botão de upload
+const input = document.querySelector('input');//input recebe o file, planilha no caso
+const CriptoSim = document.querySelectorAll('input[type="checkbox"]'); //checkbox para pop-up do chekbox
+const selecaoCripto = document.querySelectorAll('input[name="emailNao"]');//busca o select de saida no html
+const popup = document.querySelector('.popup'); //pop-up de arquivo não feito upload
+var selecaoFormato = document.getElementById('formatoSaida');//busca o select de saida no html
 
 var countArchives = 0;
 input.style.opacity = 0;
-
 
 input.addEventListener('change', updateImageDisplay);
 
 function updateImageDisplay() {
   
-
   while(preview.firstChild) {
     preview.removeChild(preview.firstChild);
   }
@@ -42,7 +42,9 @@ function updateImageDisplay() {
 
         case '.csv':
 
-        functionB(nomePlanilha);
+        file.r
+
+        //functionB(nomePlanilha);
 
           var leitor = new FileReader();
 
@@ -63,7 +65,7 @@ function updateImageDisplay() {
                           + "Linha N°: "
                             + numeroLinha 
                               + "<br>" 
-                                + "Conteudo da celular: " 
+                                + "Conteudo da celula: " 
                                   + conteudoCelula); 
             return {nomeColuna, numeroLinha, conteudoCelula};
           }
@@ -75,10 +77,7 @@ function updateImageDisplay() {
         
         case '.xlsx':
 
-        functionB(nomePlanilha);
-
-
-          //console.log("Rui");
+        //functionB(nomePlanilha);
           var reader = new FileReader();
           
           reader.onload = function(e) {
@@ -102,7 +101,17 @@ function updateImageDisplay() {
             console.log(`O valor da célula ${cellAddress} é ${value} na coluna ${valueCol}`);
 
             // exibe o valor na tela
-            document.getElementById("demo" +countArchives).innerHTML = ('Coluna: '+ valueCol + "<br>" +'Valor da célula ' + cellAddress + ': ' + value);
+            document.getElementById("demo" +countArchives).innerHTML = (`Arquivo: <strong> ${file.name} n° </strong>`
+            + countArchives
+                + "<br>" 
+                  + ' Nome da coluna: '
+                    + valueCol 
+                      + "<br>" 
+                        +'Linha N°: '
+                          + cellAddress 
+                            + "<br>"
+                              + 'Conteudo da celula: ' 
+                                + value);
           };
           reader.readAsArrayBuffer(this.files[0]);
 
@@ -112,7 +121,6 @@ function updateImageDisplay() {
           para.textContent = `Arquivo ${file.name}: Arquivo não compatível. Selecione um arquivo .xls, xlsx, .csv.`;
         break;
       
-        
       }
 
       para.textContent = `Arquivo ${file.name}, tipo ${getFileExtension(file.name)}, tamanho do arquivo ${returnFileSize(file.size)}.`, countArchives++;
@@ -132,20 +140,36 @@ function updateImageDisplay() {
   //console.log("A " + countArchives);
   //console.log(reusable());
 }
-    //function reusable(file) {
-     //return `name is ${file.name}`;
-    //}
+  //function reusable(file) {
+    //return `name is ${file.name}`;
+  //}
 
-    /*function retornarDadosPlanilha(nomePlanilha, teste){
-      var nomePlanilha = file.name;
-      var teste = file.type;
-      return nomePlanilha, teste;
-    }*/
-    
+  /*function retornarDadosPlanilha(nomePlanilha, teste){
+    var nomePlanilha = file.name;
+    var teste = file.type;
+    return nomePlanilha, teste;
+  }*/
 
-    function getFileExtension(filename) {
-      return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 1);
-    }
+
+  function getFileExtension(filename) {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 1);
+  }
+
+  selecaoFormato.addEventListener('change', function(valueSaida){
+    var valueSaida = selecaoFormato.value;
+    pegarValorSaida(valueSaida);
+  })
+
+  selecaoCripto.forEach((name) => {
+    name.addEventListener('click', () => {
+      var valueSaidaCripto = selecaoCripto.name;
+      if(name.checked){
+        pegarValorCripto(valueSaidaCripto);
+      } else {
+        console.log("Marque uma opção!");
+      }
+    })
+  });
         
   const fileTypes = [
       "application/excel", //xls
@@ -186,9 +210,9 @@ function updateImageDisplay() {
     })
   });
 
-  function mostrarValor() {
+  /*function mostrarValor() {
     const comboBox = document.getElementById("formatoSaida");
     const valorEscolhido = comboBox.value;
     console.log(valorEscolhido);
     alert(valorEscolhido);
-  }
+  }*/
