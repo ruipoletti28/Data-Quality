@@ -3,8 +3,6 @@ const xlsx = require('xlsx');
 const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 
-
-
 var nomePlanilha = functionB(nomePlanilha);
 var nomePlanilha = functionB.nomePlanilha;
 
@@ -43,7 +41,7 @@ function xlsxImport(){
   const db = new sqlite3.Database('./database1.db');
 
   // Lê a planilha em formato XLSX
-  const workbook = xlsx.readFile('C:/Users/Ubuntu/Documents/Data Quality/ClassesJS/Presidents.xlsx');
+  const workbook = xlsx.readFile('./Presidents.xlsx');
 
   // Seleciona a primeira planilha do arquivo
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
