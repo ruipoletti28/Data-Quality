@@ -1,0 +1,92 @@
+html {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: large;
+  }
+
+  .archive_upload{
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+
+  .botaoArquivo{
+
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+
+    margin: auto;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-style:solid;
+    border-color: brown;
+    border-radius: 10%;
+  }
+
+  h3{
+    font-size:large
+  }
+
+  #checkBoxCripto{
+    text-align: center;
+    }
+  
+  form li, div > p { 
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    background: #eee;
+    display:right;
+    justify-content:center;
+    margin-bottom: 10px;
+    list-style-type:none;
+    border: 10px solid black; 
+  }
+
+  form p {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    line-height: 35px;
+    padding-left: 15px;
+  }
+
+  form label, form button {
+
+    margin: auto;
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    background-color: #7F9CCB;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 2px ridge black;
+    font-size: 0.8rem;
+    height:fit-content;
+
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    z-index: 9999;
+  }
