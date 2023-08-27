@@ -8,8 +8,11 @@
 </head>
 <body>
     <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="myFile">
-        <button type="submit">Upload</button>
-      </form>      
+        <input type="file" name="file" accept=".csv, .xls, .xlsx">
+        <input type="submit" value="Upload">
+      </form>       
+      
+      <a href="/download">Baixar Arquivo Editado</a>
+
 </body>
 </html>
