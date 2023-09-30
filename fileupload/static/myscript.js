@@ -9,14 +9,14 @@ const selecaoCripto = document.querySelectorAll('input[name="emailNao"]');//busc
 const popup = document.querySelector('.popup'); //pop-up de arquivo não feito upload
 var selecaoFormato = document.getElementById('formatoSaida');//busca o select de saida no html
 
-var countArchives = 0;
-input.style.opacity = 0;
+var countArchives = 0; //define como 0 a quantidade de arquivos 
+input.style.opacity = 0; //define como 0 o campo de INPUT para utilizar o novo "mais bonito"
 
-input.addEventListener('change', updateImageDisplay);
+input.addEventListener('change', updateImageDisplay); //criar um eventListener para quando tiver uma alteração (change) chamara function definida.
 
-function updateImageDisplay() {
+function updateImageDisplay() { //instanciando a função
   
-  while(preview.firstChild) {
+  while(preview.firstChild) { //código copiado, faz oque deveria fazer e eu não sei oque é 
     preview.removeChild(preview.firstChild);
   }
 
