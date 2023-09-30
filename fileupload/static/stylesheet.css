@@ -1,0 +1,95 @@
+html {
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: large;
+  background-color: #535353;
+}
+
+label, p, legend, h3 {
+  color: aliceblue;
+}
+
+body {
+  margin: auto;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.botaoArquivo, .Upload {
+  position: absolute;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  margin: auto;
+  position: relative;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-color: brown;
+  border-radius: 10%;
+}
+
+.Upload {
+  top: 20%;
+  left: 60%;
+}
+
+h3 {
+  font-size: large;
+}
+
+#checkBoxCripto {
+  text-align: center;
+}
+
+form li, div > p {
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  list-style-type: none;
+  border: 10px solid black; 
+}
+
+form p {
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  line-height: 35px;
+  padding-left: 15px;
+}
+
+form label, form button {
+  margin: auto;
+  top: 3%;
+  left: 50%;
+  transform: translate(0%, 100%);
+  background-color: #535353;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 2px ridge black;
+  font-size: 0.8rem;
+  height: fit-content;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid black;
+  z-index: 9999;
+}
