@@ -1,4 +1,5 @@
 //import functionB from './ClasseB.js';
+//import functionB from './ClasseB.js';
 import pegarValorCripto from './criptoPlanilha.js';
 import pegarValorSaida from './saidaPlanilha.js';
 const preview = document.querySelector('.visualizacao'); //botão de upload
@@ -33,21 +34,18 @@ function updateImageDisplay() {
     const listItem = document.createElement('li');
     const para = document.createElement('p');
 
-    var nomePlanilha = file.name;
-    //var tipoPlanilha = file.type;
-
     if(validFileType(file)) {     
 
       switch (getFileExtension(file.name)){
 
         case '.csv':
 
-        file.r
-
         //functionB(nomePlanilha);
 
           var leitor = new FileReader();
 
+          saveFile(curFiles);
+          
           leitor.onload = function(e) {
             var linhas = e.target.result.split("\n");
             var colunas = linhas[0].split(",");
@@ -137,24 +135,35 @@ function updateImageDisplay() {
 
     //listItem.appendChild(listItem);
   }
-  //console.log("A " + countArchives);
-  //console.log(reusable());
 }
-  //function reusable(file) {
-    //return `name is ${file.name}`;
-  //}
-
-  /*function retornarDadosPlanilha(nomePlanilha, teste){
-    var nomePlanilha = file.name;
-    var teste = file.type;
-    return nomePlanilha, teste;
-  }*/
-
-
   function getFileExtension(filename) {
     return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 1);
   }
 
+  function saveFile(curFiles) {
+    
+    const folderName = "Data Quality"; // nome da pasta
+    const folderPath = "C:/Temp"; // caminho da pasta
+    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+    window.requestFileSystem(window.PERSISTENT, 5*1024*1024, function(fs) {
+      
+      fs.root.getDirectory(folderName, {create: true}, function(dirEntry) {
+       
+        for(const file of curFiles) {
+          
+          const fileName = file.name;
+          
+          dirEntry.getFile(fileName, {create: true}, function(fileEntry) {
+            fileEntry.createWriter(function(fileWriter) {
+              fileWriter.write(file);
+              console.log(`Arquivo salvo em: ${folderPath}, ${fileName}`);
+            });
+          });
+        }
+      });
+    });
+  }
+  
   selecaoFormato.addEventListener('change', function(valueSaida){
     var valueSaida = selecaoFormato.value;
     pegarValorSaida(valueSaida);
@@ -210,9 +219,10 @@ function updateImageDisplay() {
     })
   });
 
-  /*function mostrarValor() {
-    const comboBox = document.getElementById("formatoSaida");
-    const valorEscolhido = comboBox.value;
-    console.log(valorEscolhido);
-    alert(valorEscolhido);
-  }*/
+  window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+
+  window.requestFileSystem(window.TEMPORARY, 5 * 1024 * 1024, function(fs) {
+    fs.root.getDirectory('"C:/Users/Ubuntu/Downloads/Data Quality"', {create: true}, function(dirEntry) {
+      // aqui você pode copiar o arquivo para a pasta de destino
+    });
+  });

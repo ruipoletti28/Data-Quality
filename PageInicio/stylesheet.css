@@ -1,92 +1,106 @@
 html {
-    text-align: center;
-    font-family: sans-serif;
-    font-size: large;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: large;
+  background-color: #535353;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+label, p, legend, h3{
+  color: aliceblue;
+}
+
+body {
+margin: auto;
+position: absolute;
+top: 35%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+.archive_upload{
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.botaoArquivo{
+
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+
+  margin: auto;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-style:solid;
+  border-color: brown;
+  border-radius: 10%;
+}
+
+h3{
+  font-size:large
+}
+
+#checkBoxCripto{
+  text-align: center;
   }
 
-  .archive_upload{
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-  }
+form li, div > p { 
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  background: #eee;
+  display:right;
+  justify-content:center;
+  margin-bottom: 10px;
+  list-style-type:none;
+  border: 10px solid black; 
+}
 
-  .botaoArquivo{
+form p {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  line-height: 35px;
+  padding-left: 15px;
+}
 
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
+form label, form button {
 
-    margin: auto;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-style:solid;
-    border-color: brown;
-    border-radius: 10%;
-  }
-
-  h3{
-    font-size:large
-  }
-
-  #checkBoxCripto{
-    text-align: center;
-    }
+  margin: auto;
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   
-  form li, div > p { 
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    background: #eee;
-    display:right;
-    justify-content:center;
-    margin-bottom: 10px;
-    list-style-type:none;
-    border: 10px solid black; 
-  }
+  background-color:#535353;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 2px ridge black;
+  font-size: 0.8rem;
+  height:fit-content;
 
-  form p {
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    line-height: 35px;
-    padding-left: 15px;
-  }
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
 
-  form label, form button {
-
-    margin: auto;
-    position: absolute;
-    top: 3%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    background-color: #7F9CCB;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: 2px ridge black;
-    font-size: 0.8rem;
-    height:fit-content;
-
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-  }
-
-  .popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid black;
-    z-index: 9999;
-  }
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid black;
+  z-index: 9999;
+}

@@ -3,7 +3,7 @@ const xlsx = require('xlsx');
 const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 
-var nomePlanilha = functionB(nomePlanilha);
+//var nomePlanilha = functionB(nomePlanilha);
 var nomePlanilha = functionB.nomePlanilha;
 
 console.log("teste " + nomePlanilha);
