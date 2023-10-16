@@ -7,7 +7,7 @@ ALLOWED_EXTENSIONS = {'csv', 'xlsx', 'xls'} #um array com as extensões de arqui
 MAX_FILES = 4 #limite de uploads de arquivos
 
 app = Flask(__name__, static_folder='static') #configuração do app e de arquivos estáticos como script em JS e CSS
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER #configurar página instaciada acima usando confi
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER #configurar página instaciada acima usando config.
 
 
 @app.route('/') #quando estiver com a url vazia direciona para pagina home
@@ -19,9 +19,8 @@ def index():
 def upload(): 
     """
     Esta função lida com uploads e processamento de arquivos. Ele aceita solicitações POST com arquivos anexados e os processa
-    com base em sua extensão de arquivo. Os arquivos CSV são lidos em um Pandas DataFrame, têm uma coluna adicionada e são salvos como um novo
-    Arquivo CSV. Os arquivos XLSX também são lidos em um Pandas DataFrame, têm uma coluna adicionada e são salvos como um novo arquivo XLSX.
-    Os DataFrames resultantes são combinados em um único DataFrame, que é salvo como um arquivo CSV. Finalmente, o usuário é
+    com base em sua extensão de arquivo. Os arquivos CSV e XLSX  são lidos em um Pandas DataFrame, edição de dados e são salvos como um novo
+    Arquivo sendo XLSX ou CSV. Os DataFrames resultantes são combinados em um único DataFrame, que é salvo como um arquivo CSV. Finalmente, o usuário é
     redirecionado para uma página de download.
 
     Retorna:
