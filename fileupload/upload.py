@@ -15,20 +15,14 @@ app = Flask(__name__, static_folder='static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Gere uma chave aleatória
-
-
 def generate_key():
     return Fernet.generate_key()
 
 # Salve a chave em um arquivo para uso posterior
-
-
 def save_key(key, key_file):
     key_path = os.path.join('fileupload/uploads', key_file)
     with open(key_path, 'wb') as keyfile:
         keyfile.write(key)
-
-
 class FileDecryptor:
     def __init__(self, key, encrypted_file_path, output_file_path):
         self.key = key
@@ -43,11 +37,9 @@ class FileDecryptor:
         with open(self.output_file_path, 'wb') as file:
             file.write(decrypted_data)
 
-
 @app.route('/')  # quando estiver com a url vazia direciona para pagina home
 def index():
     return render_template('home.html')  # Página home
-
 
 # metodo chamado após envio do formulário
 @app.route('/upload', methods=['POST'])
@@ -88,8 +80,6 @@ def upload():
 
                         # Tratamento de dados aqui (Classes de Limpeza, Identificação de erros e concatenação de Colunas)
 
-                        # print(FileCsv.head())  # Mostra as primeiras linhas do DataFrame
-                        # print(FileCsv.tail())  # Mostra as últimas linhas do DataFrame
                         # concatena o DF existente com DataFrame novo gerado acima
                         combined_df = pd.concat(
                             [combined_df, FileCsv], ignore_index=True)
@@ -133,9 +123,6 @@ def upload():
 
                 # Adicione o arquivo criptografado
                 processed_files.append(encrypted_file_path)
-
-                # Imprima a chave gerada
-                # print("Chave de criptografia:", key)
 
                 mensagem = key
                 return render_template('aviso.html', mensagem=mensagem)
@@ -190,22 +177,34 @@ def upload():
                 processed_files.append(combined_file_path)
 
         mensagem = "Gerado com sucesso seu arquivo."
-        # retorna para a página de download
         return render_template('aviso.html', mensagem=mensagem)
 
     # caso ultrapsse valor de arquivos retorna uma mensagem
-    return 'Número de arquivos excede o limite permitido.'
+    notificacao = "Número de arquivos excede o limite permitido."
+    return render_template('info.html', notificacao=notificacao)
 
 
 @app.route('/descriptografar', methods=['POST'])
 def descriptografar():
+    """
+    Descriptografa um arquivo criptografado com base na entrada do usuário.
+
+    A função recebe uma solicitação POST com a entrada do usuário, incluindo a chave de criptografia e o formato de saída desejado.
+    Se o formato de saída for xlsx ou csv, a função verifica se o arquivo criptografado existe e o descriptografa usando a chave fornecida.
+    Se a descriptografia for bem-sucedida, a função retornará uma mensagem de sucesso ao usuário.
+    Caso o arquivo criptografado não seja encontrado, a função retorna uma mensagem de erro ao usuário.
+
+    Retorna:
+        Um modelo HTML renderizado com uma mensagem de sucesso ou de erro, dependendo do resultado do processo de descriptografia.
+    """
     chave = request.form.get('chave')
     formato_saida = request.form.get('formatoSaida')
     if formato_saida == "xlsx":
         encrypted_file_path = 'fileupload/uploads/encrypted_combined.xlsx'
         output_file_path = 'fileupload/uploads/decrypted_combined.xlsx'
         if os.path.exists(encrypted_file_path):
-            decryptor = FileDecryptor(chave, encrypted_file_path, output_file_path)
+            decryptor = FileDecryptor(
+                chave, encrypted_file_path, output_file_path)
             decryptor.decrypt_file()
 
             notificacao = "Arquivo descriptografado com sucesso!"
@@ -217,14 +216,17 @@ def descriptografar():
         encrypted_file_path = 'fileupload/uploads/encrypted_combined.csv'
         output_file_path = 'fileupload/uploads/decrypted_combined.csv'
         if os.path.exists(encrypted_file_path):
-            decryptor = FileDecryptor(chave, encrypted_file_path, output_file_path)
+            decryptor = FileDecryptor(
+                chave, encrypted_file_path, output_file_path)
             decryptor.decrypt_file()
 
             notificacao = "Arquivo descriptografado com sucesso!"
             return render_template('info.html', notificacao=notificacao)
         notificacao = "Arquivo Não Encontrado, faça upload e criptografe antes, ou selecione extensão do arquivo criptografado"
         return render_template('info.html', notificacao=notificacao)
-    return 'Erro?'
+    notificacao = "Erro, volte do inicio"
+    return render_template('info.html', notificacao=notificacao)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
