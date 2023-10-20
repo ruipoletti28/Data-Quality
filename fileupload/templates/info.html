@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/stylesheet.css') }}">
+    <title>Importante!!</title>
+</head>
+<body>
+    <h1>Aviso:</h1>
+    <p>{{ notificacao }}</p>
+
+    <!-- Botão para voltar à página inicial -->
+    <a href="/">Voltar à página inicial</a>
+</body>
+</html>

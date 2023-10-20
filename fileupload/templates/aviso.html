@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/stylesheet.css') }}">
+    <title>Aviso Importante</title>
+</head>
+<body>
+    <h1>Chave de criptografia gerada:</h1>
+    <p>{{ mensagem }}</p>
+
+    <div class="cripto">
+    <h1>Descriptografar Arquivos</h1>
+    <form id="descriptografar" method="post" action="/descriptografar">
+        <label for="chave">Chave de Criptografia:</label>
+        <input type="text" id="chave" name="chave" required>
+        <select id="formatoSaida" name="formatoSaida" required>
+            <option value="xlsx">.xlsx</option>  
+            <option value="csv">.csv</option>    
+        </select>
+        <button type="submit" id="descriptografar">Descriptografar</button>
+    </form>
+    </div>
+</body>
+</html>

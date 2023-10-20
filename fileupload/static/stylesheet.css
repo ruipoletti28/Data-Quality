@@ -17,26 +17,6 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.botaoArquivo, .Upload {
-  position: absolute;
-  cursor: grab;
-  cursor: -moz-grab;
-  cursor: -webkit-grab;
-  margin: auto;
-  position: relative;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-style: solid;
-  border-color: brown;
-  border-radius: 10%;
-}
-
-.Upload {
-  top: 20%;
-  left: 60%;
-}
-
 h3 {
   font-size: large;
 }
@@ -66,11 +46,10 @@ form p {
   padding-left: 15px;
 }
 
-form label, form button {
+.cripto label, .cripto button {
   margin: auto;
-  top: 3%;
   left: 50%;
-  transform: translate(0%, 100%);
+  transform: translate(0%, 0%);
   background-color: #535353;
   padding: 5px 10px;
   border-radius: 8px;
@@ -78,8 +57,26 @@ form label, form button {
   font-size: 0.8rem;
   height: fit-content;
   cursor: grab;
-  cursor: -moz-grab;
-  cursor: -webkit-grab;
+}
+
+form label, form button{
+  cursor: grab;
+  margin: auto;
+  left: 50%;
+  transform: translate(0%, 70%);
+  background-color: #535353;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 2px ridge black;
+  font-size: 0.8rem;
+  height: fit-content;
+
+}
+
+#botaoArquivo{
+  display: grid;
+  cursor: grab;
+  justify-content: space-around;
 }
 
 .popup {

@@ -15,7 +15,7 @@
 
 <body>
     <div class="visualizacao"></div>
-    <form action="/upload" method="POST" enctype="multipart/form-data"> <!-- Adicionado o atributo action e o método POST -->
+    <form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> <!-- Adicionado o atributo action e o método POST -->
         <div id="botaoArquivo">
             <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
             <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx, .xls" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
@@ -28,7 +28,6 @@
 
         <h3> Formato de saída:
             <select id="formatoSaida" name="formatoSaida" required>
-                <option value="null"></option>
                 <option value="xlsx">.xlsx</option>  
                 <!--<option value="xls">.xls</option>-->  
                 <option value="csv">.csv</option>    
@@ -37,11 +36,11 @@
 
         <legend>
             Deseja criptografar?
-            <input type="checkbox" id="CriptoSim" name="CriptoSim" value="CriptoSim" required>
+            <input type="checkbox" id="CriptoSim" name="CriptoSim" value="CriptoSim">
         </legend>
 
         <legend id="checkBoxCripto" align="left" required>
-            Enviar por e-mail a criptografia e/ou arquivo? 
+            Enviar por e-mail a criptografia ou arquivo? 
             <br> 
             <input type="radio" id="emailNao" name="emailNao" value="emailNao"> Sim 
             <input type="radio" id="emailChaveCriptoSim" name="emailNao" value="emailChaveCriptoSim"> Apenas a chave de criptografia 
