@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--script type="module" src="myscript.js" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>-->
-    <script src="{{ url_for('static', filename='../static/myscript.js') }}"></script>
-    <script type="module" src="../static/myscript.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css" media="screen"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/stylesheet.css') }}">
+    <!--script type="module" src="myscript.js" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+    <script src="{{ url_for('static', filename='../static/myscript.js') }}"></script>-->
+    <script type="module" src="../static/myscript.js"></script>
     <!--<link rel="stylesheet" type="text/css" href="../static/stylesheet.css" media="screen"/>-->
     <title>Data Quality</title>
 </head>
@@ -21,10 +21,10 @@
             <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx, .xls" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
         </div>
 
+        <p align="left" id="demo0"></p>
         <p align="left" id="demo1"></p>
         <p align="left" id="demo2"></p>
         <p align="left" id="demo3"></p>
-        <p align="left" id="demo4"></p>
 
         <h3> Formato de saída:
             <select id="formatoSaida" name="formatoSaida" required>

@@ -4,7 +4,7 @@ const CriptoSim = document.querySelectorAll('input[type="checkbox"]');
 const selecaoCripto = document.querySelectorAll('input[name="emailNao"]');
 const popup = document.querySelector(".popup");
 var selecaoFormato = document.getElementById("formatoSaida");
-var countArchives = -1;
+var countArchives = 0;
 input.style.opacity = 0;
 
 input.addEventListener("change", updateImageDisplay);
@@ -54,7 +54,6 @@ function updateImageDisplay() {
               "Conteudo da celula: " +
               conteudoCelula;
             //saveFile(curFiles);
-            countArchives++;
             return { nomeColuna, numeroLinha, conteudoCelula };
           };
 
@@ -106,7 +105,6 @@ function updateImageDisplay() {
               "Conteudo da celula: " +
               value;
             //saveFile(curFiles);
-            countArchives++;
           };
           reader.readAsArrayBuffer(this.files[0]);
 
