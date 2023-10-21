@@ -53,7 +53,8 @@ function updateImageDisplay() {
               "<br>" +
               "Conteudo da celula: " +
               conteudoCelula;
-            //saveFile(curFiles);
+
+              countArchives++;
             return { nomeColuna, numeroLinha, conteudoCelula };
           };
 
@@ -104,7 +105,8 @@ function updateImageDisplay() {
               "<br>" +
               "Conteudo da celula: " +
               value;
-            //saveFile(curFiles);
+
+              countArchives++;
           };
           reader.readAsArrayBuffer(this.files[0]);
 
@@ -116,15 +118,7 @@ function updateImageDisplay() {
           break;
       }
 
-      // Crie IDs únicos com base no índice
-      const uniqueId = "demo" + i;
-
-      para.textContent = `Arquivo ${file.name}, tipo ${getFileExtension(file.name)}, tamanho do arquivo ${returnFileSize(file.size)}.`;
-
-      // Defina o ID no elemento
-      listItem.setAttribute("id", uniqueId);
-      listItem.appendChild(para);
-      countArchives++;
+     
     } else {
       para.textContent = `Arquivo ${file.name}: Arquivo não compatível. Selecione um arquivo .xls, .xlsx, .csv.`;
       listItem.appendChild(para);
