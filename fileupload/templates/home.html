@@ -14,48 +14,60 @@
 </head>
 
 <body>
-    <div class="visualizacao"></div>
-    <form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> <!-- Adicionado o atributo action e o método POST -->
-        <div id="botaoArquivo">
-            <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
-            <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx, .xls" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
-        </div>
+    <header>
+    <h1> Projeto de Conclusão de Curso - Data Quality com Criptografia</h1>
+    </header>
+    
+    <h3>Faça o envio das planilhas que deseja fazer a limpeza e/ou criptografar abaixo:</h3>
+    <div class="visualizacao">
+        <form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> <!-- Adicionado o atributo action e o método POST -->
+            <div id="botaoArquivo">
+                <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
+                <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx, .xls" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
+            </div>
 
-        <p align="left" id="demo0"></p>
-        <p align="left" id="demo1"></p>
-        <p align="left" id="demo2"></p>
-        <p align="left" id="demo3"></p>
+            <p align="left" id="demo0"></p>
+            <p align="left" id="demo1"></p>
+            <p align="left" id="demo2"></p>
+            <p align="left" id="demo3"></p>
 
-        <h3> Formato de saída:
-            <select id="formatoSaida" name="formatoSaida" required>
-                <option value="xlsx">.xlsx</option>  
-                <!--<option value="xls">.xls</option>-->  
-                <option value="csv">.csv</option>    
-            </select>
-        </h3>
+            <div id="formEnvioCampos">
+            <h3> Formato de saída:
+                <select id="formatoSaida" name="formatoSaida" required>
+                    <option value="xlsx">.xlsx</option>  
+                    <!--<option value="xls">.xls</option>-->  
+                    <option value="csv">.csv</option>    
+                </select>
+            </h3>
 
-        <legend>
-            Deseja criptografar?
-            <input type="checkbox" id="CriptoSim" name="CriptoSim" value="CriptoSim">
-        </legend>
+            <legend id="checkBoxCripto">
+                Deseja criptografar?
+                <input type="checkbox" id="CriptoSim" name="CriptoSim" value="CriptoSim">
+            </legend>
 
-        <legend id="checkBoxCripto" align="left" required>
-            Enviar por e-mail a criptografia ou arquivo? 
-            <br> 
-            <input type="radio" id="emailNao" name="emailNao" value="emailNao"> Sim 
-            <input type="radio" id="emailChaveCriptoSim" name="emailNao" value="emailChaveCriptoSim"> Apenas a chave de criptografia 
-            <input type="radio" id="nenhumaOpcao" name="emailNao" value="nenhum">Nenhuma opção 
-        </legend>
-
-        <button type="submit" id="Upload"> <!-- Adicionado type="submit" para enviar o formulário -->
-            Enviar para tratamento
-        </button>
-    </form>
-
+            <legend id="checkBoxEmail">
+                Enviar por e-mail o arquivo gerado?
+                <input type="checkbox" id="enviarViaEmail" name="enviarViaEmail" value="enviarViaEmail">
+            </legend>
+            </div>
+            <button type="submit" id="Upload"> <!-- Adicionado type="submit" para enviar o formulário -->
+                <a>Enviar para tratamento</a>
+            </button>
+        </form>
+    </div>
     <div id="popups" class="popup">
         <p> O arquivo será criptografado</p>
         <button id="close-popup-btn">Fechar pop-up</button>
     </div>
+
+    <footer>
+    <h3 class="rodape" >Com objetivo de produzir uma ferramenta para auxiliar na produção de dados, principalmente quando estão em diferentes fontes, foi desenvolvido o Data Quality
+        com Criptografia, para realizar a junção e correção de possíveis erros na tabela, tanto csv ou xlsx. Também com a possibilidade de realizar a criptografia
+        do arquivo gerado ao fim. Ao final é gerado a chave de criptografia e a possibilidade de descriptografar o arquivo.
+    </h3>
+
+    <h3> Projeto desenvolvido por <a href="https://github.com/ruipoletti28" target="_blank">Rui Carlos Poletti Junior</a>, estudante do curso ADS no IFSP - Campus de Hortolandia</h3>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.core.min.js"></script>
 

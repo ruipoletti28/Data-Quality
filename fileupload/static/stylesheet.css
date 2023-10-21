@@ -5,24 +5,28 @@ html {
   background-color: #535353;
 }
 
-label, p, legend, h3 {
+label, p, legend{
   color: aliceblue;
+}
+
+h1, h2, h3 {
+  color: aliceblue;
+  /*font-size: large;*/
+  transform: translate(0%, 10%);
 }
 
 body {
   margin: auto;
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-h3 {
-  font-size: large;
-}
-
-#checkBoxCripto {
-  text-align: center;
+.rodape {
+  border: 2px solid #000; /* Define uma borda sólida preta */
+  padding: 10px; /* Adicione algum preenchimento para dar espaço entre o texto e a borda */
+  border-radius: 10px;
 }
 
 form li, div > p {
@@ -59,11 +63,16 @@ form p {
   cursor: grab;
 }
 
+#formEnvioCampos{
+  transform: translate(0%, -30%);
+}
+
 form label, form button{
   cursor: grab;
   margin: auto;
   left: 50%;
-  transform: translate(0%, 70%);
+  transform: translate(0%, 0%);
+  color: aliceblue;
   background-color: #535353;
   padding: 5px 10px;
   border-radius: 8px;
@@ -89,4 +98,20 @@ form label, form button{
   padding: 20px;
   border: 1px solid black;
   z-index: 9999;
+}
+
+.visualizacao{
+  border: 2px solid #000; /* Define uma borda sólida preta */
+  padding: 10px; /* Adicione algum preenchimento para dar espaço entre o texto e a borda */
+  border-radius: 10px;
+}
+
+/* link que ainda não foi visitado */
+a:link {
+ color: aliceblue;
+}
+
+/* link que foi visitado */
+a:visited {
+   color: white;
 }
