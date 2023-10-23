@@ -1,10 +1,10 @@
-const preview = document.querySelector(".visualizacao");
+const preview = document.querySelector(".visual");
 const input = document.querySelector("input");
 const CriptoSim = document.querySelectorAll('input[type="checkbox"]');
 const selecaoCripto = document.querySelectorAll('input[name="emailNao"]');
 const popup = document.querySelector(".popup");
 var selecaoFormato = document.getElementById("formatoSaida");
-var countArchives = 0;
+var countArchives = 1;
 input.style.opacity = 0;
 
 input.addEventListener("change", updateImageDisplay);
@@ -26,14 +26,12 @@ function updateImageDisplay() {
     const file = curFiles[i];
     const listItem = document.createElement("li");
     const para = document.createElement("p");
-
+  
     if (validFileType(file)) {
       switch (getFileExtension(file.name)) {
         case ".csv":
-          //functionB(nomePlanilha);
-
           var leitor = new FileReader();
-
+  
           leitor.onload = function (e) {
             var linhas = e.target.result.split("\n");
             var colunas = linhas[0].split(",");
@@ -41,6 +39,7 @@ function updateImageDisplay() {
             var nomeColuna = colunas[0]; // Nome da coluna 1
             var numeroLinha = 2; // Número da linha 1
             var conteudoCelula = celula[0]; // Conteúdo da célula 1,1
+  
             document.getElementById("demo" + countArchives).innerHTML =
               `Arquivo: <strong> ${file.name} n° </strong>` +
               countArchives +
@@ -51,48 +50,32 @@ function updateImageDisplay() {
               "Linha N°: " +
               numeroLinha +
               "<br>" +
-              "Conteudo da celula: " +
+              "Conteúdo da célula: " +
               conteudoCelula;
-
-              countArchives++;
-            return { nomeColuna, numeroLinha, conteudoCelula };
+  
+            countArchives++;
           };
-
-          leitor.readAsText(
-            file,
-            function (nomeColuna, numeroLinha, conteudoCelula) {
-              console.log(nomeColuna, numeroLinha, conteudoCelula);
-            }
-          );
+  
+          leitor.readAsText(file);
           break;
-
+  
         case ".xlsx":
-          //functionB(nomePlanilha);
           var reader = new FileReader();
-
+  
           reader.onload = function (e) {
             var data = new Uint8Array(e.target.result);
             var workbook = XLSX.read(data, { type: "array" });
-
-            // seleciona a planilha que deseja ler
+  
             var sheetName = workbook.SheetNames[0];
             var worksheet = workbook.Sheets[sheetName];
-
-            // seleciona a coluna e a linha que deseja mostrar
+  
             var cellAddress = "A2";
             var colAddress = "A1";
             var cell = worksheet[cellAddress];
             var colName = worksheet[colAddress];
-            //var colIndex = cell ? cell.c : undefined; // obtém o índice da coluna
-            //var colName = colIndex !== undefined ? XLSX.utils.decode_col(colIndex) : undefined; // decodifica o índice em nome de coluna
             var value = cell ? cell.v : undefined;
             var valueCol = colName ? colName.v : undefined;
-
-            console.log(
-              `O valor da célula ${cellAddress} é ${value} na coluna ${valueCol}`
-            );
-
-            // exibe o valor na tela
+  
             document.getElementById("demo" + countArchives).innerHTML =
               `Arquivo: <strong> ${file.name} n° </strong>` +
               countArchives +
@@ -103,27 +86,26 @@ function updateImageDisplay() {
               "Linha N°: " +
               cellAddress +
               "<br>" +
-              "Conteudo da celula: " +
+              "Conteúdo da célula: " +
               value;
-
-              countArchives++;
+  
+            countArchives++;
           };
-          reader.readAsArrayBuffer(this.files[0]);
-
+  
+          reader.readAsArrayBuffer(file);
           break;
-
+  
         default:
           para.textContent = `Arquivo ${file.name}: Arquivo não compatível. Selecione um arquivo .xls, .xlsx, .csv.`;
           listItem.appendChild(para);
           break;
       }
-
-     
     } else {
       para.textContent = `Arquivo ${file.name}: Arquivo não compatível. Selecione um arquivo .xls, .xlsx, .csv.`;
       listItem.appendChild(para);
     }
   }
+  
 }
 
 const fileTypes = [
