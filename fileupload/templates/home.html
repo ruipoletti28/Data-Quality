@@ -19,17 +19,18 @@
     </header>
     
     <h3>Faça o envio das planilhas que deseja fazer a limpeza e/ou criptografar abaixo:</h3>
-    <div class="visualizacao">
+    <div class="visual"></div>
+        <div class="visualizacao">
         <form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> <!-- Adicionado o atributo action e o método POST -->
             <div id="botaoArquivo">
                 <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
                 <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx, .xls" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
             </div>
 
-            <p align="left" id="demo0"></p>
             <p align="left" id="demo1"></p>
             <p align="left" id="demo2"></p>
             <p align="left" id="demo3"></p>
+            <p align="left" id="demo4"></p>
 
             <div id="formEnvioCampos">
             <h3> Formato de saída:
@@ -54,6 +55,7 @@
                 <a>Enviar para tratamento</a>
             </button>
         </form>
+        </div>
     </div>
     <div id="popups" class="popup">
         <p> O arquivo será criptografado</p>
