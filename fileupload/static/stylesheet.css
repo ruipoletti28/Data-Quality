@@ -9,7 +9,7 @@ label, p, legend{
   color: aliceblue;
 }
 
-h1, h2, h3 {
+h1, h2, h3, a{
   color: aliceblue;
   /*font-size: large;*/
   transform: translate(0%, 10%);
@@ -18,7 +18,7 @@ h1, h2, h3 {
 body {
   margin: auto;
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -67,7 +67,7 @@ form p {
   transform: translate(0%, -30%);
 }
 
-form label, form button{
+form label, form button, button{
   cursor: grab;
   margin: auto;
   left: 50%;
@@ -98,6 +98,10 @@ form label, form button{
   padding: 20px;
   border: 1px solid black;
   z-index: 9999;
+}
+
+.descripto{
+  color: black;
 }
 
 .visualizacao{

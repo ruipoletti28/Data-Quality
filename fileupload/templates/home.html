@@ -24,7 +24,7 @@
         <form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> <!-- Adicionado o atributo action e o método POST -->
             <div id="botaoArquivo">
                 <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
-                <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx, .xls" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
+                <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx" multiple required> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
             </div>
 
             <p align="left" id="demo1"></p>
@@ -67,7 +67,10 @@
         com Criptografia, para realizar a junção e correção de possíveis erros na tabela, tanto csv ou xlsx. Também com a possibilidade de realizar a criptografia
         do arquivo gerado ao fim. Ao final é gerado a chave de criptografia e a possibilidade de descriptografar o arquivo.
     </h3>
+    
+    <br>
 
+    <h3>Se deseja descriptografar: <button><a href="/descriptografia" class="descripto">Clique aqui</a></button></h3>
     <h3> Projeto desenvolvido por <a href="https://github.com/ruipoletti28" target="_blank">Rui Carlos Poletti Junior</a>, estudante do curso ADS no IFSP - Campus de Hortolandia</h3>
     </footer>
 

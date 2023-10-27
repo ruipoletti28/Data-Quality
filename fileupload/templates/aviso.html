@@ -8,20 +8,8 @@
     <title>Aviso Importante</title>
 </head>
 <body>
-    <h1>Chave de criptografia gerada:</h1>
+    <h1>{{ mensagem }}</h1>
     <p>{{ mensagem }}</p>
-
-    <div class="cripto">
-    <h1>Descriptografar Arquivos</h1>
-    <form id="descriptografar" method="post" action="/descriptografar">
-        <label for="chave">Chave de Criptografia:</label>
-        <input type="text" id="chave" name="chave" required>
-        <select id="formatoSaida" name="formatoSaida" required>
-            <option value="xlsx">.xlsx</option>  
-            <option value="csv">.csv</option>    
-        </select>
-        <button type="submit" id="descriptografar">Descriptografar</button>
-    </form>
-    </div>
+    <a href="/">Voltar à página inicial</a>
 </body>
 </html>

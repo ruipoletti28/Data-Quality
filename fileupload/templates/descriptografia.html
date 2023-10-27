@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/stylesheet.css') }}">
+    <script type="module" src="../static/myscript.js"></script>
+    <title>Descriptografar os arquivos</title>
+</head>
+<body>
+    <header>
+        <h1> Projeto de Conclusão de Curso - Data Quality com Criptografia</h1>
+        </header>
+        
+    <div class="cripto">
+        <h2>Descriptografar Arquivos</h2>
+        <form id="descriptografar" method="post" action="/descriptografar">
+            <div id="botaoArquivo">
+                <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
+                <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx" multiple required> </input> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
+            </div>
+            <a for="chave">Chave de Criptografia:</a>
+            <input type="text" id="chave" name="chave" required>
+            <select id="formatoSaida" name="formatoSaida" required>
+                <option value="xlsx">.xlsx</option>  
+                <option value="csv">.csv</option>    
+            </select>
+            <button type="submit" id="descriptografar">Descriptografar</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <a href="/">Voltar à página inicial</a>
+</body>
+</html>
