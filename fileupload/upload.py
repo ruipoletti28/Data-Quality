@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_file
+from flask import Flask, request, render_template
 from cryptography.fernet import Fernet
 import os
 import pandas as pd
@@ -231,7 +231,7 @@ def descriptografar():
             chave = request.form.get('chave')
             descriptografador = DescriptografarArquivo(chave, arquivo_criptografado, local_arquivo_caminho)
             descriptografador.decrypt_file()
-            
+
             notificacao = "Arquivo descriptografado com sucesso!"
             return render_template('info.html', notificacao=notificacao)
         else:
