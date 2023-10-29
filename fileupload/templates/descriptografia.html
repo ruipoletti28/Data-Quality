@@ -15,10 +15,10 @@
         
     <div class="cripto">
         <h2>Descriptografar Arquivos</h2>
-        <form id="descriptografar" method="post" action="/descriptografar">
+        <form id="descriptografar" method="POST" action="/descriptografar" enctype="multipart/form-data">
             <div id="botaoArquivo">
-                <label for="arquivo"> Envie seu arquivo (XLS, XLSX, CSV) </label>
-                <input type="file" id="arquivo" name="arquivo" accept=".csv, .xlsx" multiple required> </input> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
+                <label for="arquivo"> Envie seu arquivo (XLSX ou CSV) </label>
+                <input type="file" id="arquivo" name="arquivoCriptografado" accept=".csv, .xlsx" placeholder="Envie aqui:" multiple required> </input> <!--Para usar no JS usar type="File", PY usar name="arquivo"-->
             </div>
             <a for="chave">Chave de Criptografia:</a>
             <input type="text" id="chave" name="chave" required>

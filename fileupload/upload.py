@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for, flash, send_file
 from cryptography.fernet import Fernet
 import os
 import pandas as pd
@@ -41,22 +41,25 @@ def salvar_key(key, key_file):
     with open(key_path, 'wb') as keyfile:
         keyfile.write(key)
 class DescriptografarArquivo:
-    def __init__(self, key, arquivo_criptografado_caminho, local_arquivo_caminho):
+    def __init__(self, key, arquivo_enviado, local_arquivo_caminho):
         self.key = key
-        self.arquivo_criptografado_caminho = arquivo_criptografado_caminho
+        self.arquivo_enviado = arquivo_enviado
         self.local_arquivo_caminho = local_arquivo_caminho
 
     def decrypt_file(self):
         fernet = Fernet(self.key)
-        with open(self.arquivo_criptografado_caminho, 'rb') as file:
-            criptografado_dado = file.read()
-            decrypted_data = fernet.decrypt(criptografado_dado)
+        arquivo_bytes = self.arquivo_enviado.read()
+        decrypted_data = fernet.decrypt(arquivo_bytes)
         with open(self.local_arquivo_caminho, 'wb') as file:
             file.write(decrypted_data)
 
 @app.route('/')  # quando estiver com a url vazia direciona para pagina home
 def index():
     return render_template('home.html')  # Página home
+
+@app.route('/descriptografia')  # quando estiver com a url vazia direciona para pagina home
+def cripto():
+    return render_template('descriptografia.html')  # Página home
 
 # metodo chamado após envio do formulário
 @app.route('/upload', methods=['POST'])
@@ -78,7 +81,10 @@ def upload():
     formato_saida = request.form.get('formatoSaida')
     # recebe parametro para realizar ou não a criptografia
     criptografia = request.form.get('CriptoSim')
-
+    #recebe parametro do nome final do arquivo
+    nomeFinal = request.form.get('nomeFinal')
+    #variavel para salvar nome e extensão
+    arquivo_nome_com_extensao = nomeFinal + "." + formato_saida
     # verifica se a quantidade de arquivos é menor ou igual à quantidade de arquivos definido logo acima
     if len(uploaded_files) <= MAX_FILES:
         combinado_df = pd.DataFrame()  # Crie um DataFrame vazio para combinar as planilhas
@@ -118,12 +124,12 @@ def upload():
 
         if formato_saida == "xlsx":  # verifica no form o valor de formato de saída definido pelo usuário
             if criptografia == "CriptoSim":
-
+                
                 key = generate_key()
-                salvar_key(key, 'encryption_key.key')
+                salvar_key(key, nomeFinal + '_key.key')
 
                 # Caminho para planilha combinada em formato XLSX no caminho (path) alterando nome do arquivo
-                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], 'combined.xlsx')
+                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo_nome_com_extensao)
                 # converte para XLSX
                 combinado_df.to_excel(combinado_arquivo_caminho, index=False)
 
@@ -137,19 +143,19 @@ def upload():
 
                 # Salva o arquivo criptografado
                 arquivo_criptografado_caminho = os.path.join(
-                    app.config['UPLOAD_FOLDER'], 'criptografado_combinado.xlsx')
+                    app.config['UPLOAD_FOLDER'], 'criptografado_' + arquivo_nome_com_extensao)
                 with open(arquivo_criptografado_caminho, 'wb') as file:
                     file.write(criptografado_dado)
 
                 # Adicione o arquivo criptografado
                 arquivos_processados.append(arquivo_criptografado_caminho)
 
-                mensagem = key
+                mensagem = ('Arquivo gerado com sucesso: ',key)
                 return render_template('aviso.html', mensagem=mensagem)
 
             else:
                 # Caminho para planilha combinada em formato XLSX no caminho (path) alterando nome do arquivo
-                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], 'combined.xlsx')
+                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo_nome_com_extensao)
                 # converte para XLSX
                 combinado_df.to_excel(combinado_arquivo_caminho, index=False)
                 # salva o arquivo convertido
@@ -159,10 +165,10 @@ def upload():
             if criptografia == "CriptoSim":
 
                 key = generate_key()
-                salvar_key(key, 'encryption_key.key')
+                salvar_key(key, nomeFinal + '_key.key')
 
                 # Caminho para a planilha combinada em formato CSV no caminho (path) alterando nome do arquivo
-                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], 'combined.csv')
+                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo_nome_com_extensao)
                 # converte para CSV
                 combinado_df.to_csv(combinado_arquivo_caminho, index=False)
 
@@ -175,24 +181,24 @@ def upload():
                 criptografado_dado = fernet.encrypt(data)
 
                 # Salva o arquivo criptografado
-                arquivo_criptografado_caminho = os.path.join(app.config['UPLOAD_FOLDER'], 'criptografado_combinado.csv')
+                arquivo_criptografado_caminho = os.path.join(app.config['UPLOAD_FOLDER'], 'criptografado_' + arquivo_nome_com_extensao)
                 with open(arquivo_criptografado_caminho, 'wb') as file:
                     file.write(criptografado_dado)
 
                 # Adicione o arquivo criptografado
                 arquivos_processados.append(arquivo_criptografado_caminho)
-                mensagem = key
+                mensagem = ('Arquivo gerado com sucesso:',key)
                 return render_template('aviso.html', mensagem=mensagem)
 
             else:
                 # Caminho para a planilha combinada em formato CSV no caminho (path) alterando nome do arquivo
-                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], 'combined.csv')
+                combinado_arquivo_caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo_nome_com_extensao)
                 # converte para CSV
                 combinado_df.to_csv(combinado_arquivo_caminho, index=False)
                 # salva o arquvio convertido
                 arquivos_processados.append(combinado_arquivo_caminho)
 
-        mensagem = "Gerado com sucesso seu arquivo."
+        mensagem = "Seu arquivo foi gerado com sucesso"
         return render_template('aviso.html', mensagem=mensagem)
 
     # caso ultrapsse valor de arquivos retorna uma mensagem
@@ -215,13 +221,49 @@ def descriptografar():
     """
     chave = request.form.get('chave') #varivavel chave recebe parametro do HTML chave
     formato_saida = request.form.get('formatoSaida') #varivavel formato_saida recebe parametro do HTML formatoSaida
-    if formato_saida == "xlsx": #se formato XLSX ele pega o caminho variavél do arquivo criptografado com extensão XLSX.
+        
+    arquivo_criptografado = request.files.get('arquivoCriptografado')
+
+    if formato_saida == "xlsx":
+        if arquivo_criptografado and arquivo_criptografado.filename:  # Verifica se um arquivo foi enviado
+
+            local_arquivo_caminho = 'fileupload/uploads/descriptografado_' +  arquivo_criptografado.filename
+            chave = request.form.get('chave')
+            descriptografador = DescriptografarArquivo(chave, arquivo_criptografado, local_arquivo_caminho)
+            descriptografador.decrypt_file()
+            
+            notificacao = "Arquivo descriptografado com sucesso!"
+            return render_template('info.html', notificacao=notificacao)
+        else:
+            notificacao = "Nenhum arquivo enviado para descriptografar."
+            return render_template('info.html', notificacao=notificacao)
+        
+    elif formato_saida == "csv":
+        if arquivo_criptografado and arquivo_criptografado.filename:  # Verifica se um arquivo foi enviado
+
+            local_arquivo_caminho = 'fileupload/uploads/descriptografado_' +  arquivo_criptografado.filename
+            chave = request.form.get('chave')
+            descriptografador = DescriptografarArquivo(chave, arquivo_criptografado, local_arquivo_caminho)
+            descriptografador.decrypt_file()
+
+            notificacao = "Arquivo descriptografado com sucesso!"
+            return render_template('info.html', notificacao=notificacao)
+        else:
+            notificacao = "Nenhum arquivo enviado para descriptografar."
+            return render_template('info.html', notificacao=notificacao)
+    else:
+        notificacao = "Erro, volte do início"
+    return render_template('info.html', notificacao=notificacao)
+
+
+    """if formato_saida == "xlsx": #se formato XLSX ele pega o caminho variavél do arquivo criptografado com extensão XLSX.
         arquivo_criptografado_caminho = 'fileupload/uploads/criptografado_combinado.xlsx'
         local_arquivo_caminho = 'fileupload/uploads/descriptografado_combinado.xlsx'
         if os.path.exists(arquivo_criptografado_caminho): #verificar se o arquivo definido no caminho acima existe
             descriptografador = DescriptografarArquivo(chave, arquivo_criptografado_caminho, local_arquivo_caminho) #variavel recebe o resultado do método DescriptografarArquivo passando os parametros CHAVE, CAMINHO DE ENTRADA E SAÍDA DO ARQUIVO
             descriptografador.decrypt_file() 
             notificacao = "Arquivo descriptografado com sucesso!"
+            print(caminho)
             return render_template('info.html', notificacao=notificacao) #retorna mensagem no HTML INFO.HTML notificando o sucesso
         notificacao = "Arquivo Não Encontrado, faça upload e criptografe antes, ou selecione extensão do arquivo criptografado" 
         return render_template('info.html', notificacao=notificacao) #caso não encontre o caminho retorna no html INFO.HTML notificando que não foi encontrado o caminho ou arquivo
@@ -237,8 +279,7 @@ def descriptografar():
         notificacao = "Arquivo Não Encontrado, faça upload e criptografe antes, ou selecione extensão do arquivo criptografado"
         return render_template('info.html', notificacao=notificacao)
     notificacao = "Erro, volte do inicio"
-    return render_template('info.html', notificacao=notificacao)
-
+    return render_template('info.html', notificacao=notificacao)"""
 
 if __name__ == '__main__':
     app.run(debug=True)
