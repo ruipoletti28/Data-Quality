@@ -15,10 +15,18 @@ h1, h2, h3, a{
   transform: translate(0%, 10%);
 }
 
-body {
+#TelaInicial{
   margin: auto;
   position: absolute;
-  top: 45%;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#TelaCripto{
+  margin: auto;
+  position: absolute;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

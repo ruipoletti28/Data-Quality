@@ -126,6 +126,8 @@ def upload():
             if criptografia == "CriptoSim":
                 
                 key = generate_key()
+                key_bytes = key.decode('utf-8')
+
                 salvar_key(key, nomeFinal + '_key.key')
 
                 # Caminho para planilha combinada em formato XLSX no caminho (path) alterando nome do arquivo
@@ -150,7 +152,7 @@ def upload():
                 # Adicione o arquivo criptografado
                 arquivos_processados.append(arquivo_criptografado_caminho)
 
-                mensagem = ('Arquivo gerado com sucesso: ',key)
+                mensagem = 'Arquivo gerado com sucesso, chave de criptografia: ' + key_bytes
                 return render_template('aviso.html', mensagem=mensagem)
 
             else:
@@ -165,6 +167,8 @@ def upload():
             if criptografia == "CriptoSim":
 
                 key = generate_key()
+                key_bytes = key.decode('utf-8')
+
                 salvar_key(key, nomeFinal + '_key.key')
 
                 # Caminho para a planilha combinada em formato CSV no caminho (path) alterando nome do arquivo
@@ -187,7 +191,8 @@ def upload():
 
                 # Adicione o arquivo criptografado
                 arquivos_processados.append(arquivo_criptografado_caminho)
-                mensagem = ('Arquivo gerado com sucesso:',key)
+
+                mensagem = 'Arquivo gerado com sucesso, chave de criptografia: ' + key_bytes
                 return render_template('aviso.html', mensagem=mensagem)
 
             else:
