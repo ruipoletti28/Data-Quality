@@ -1,4 +1,4 @@
-# Data Quality com Criptografia - Projeto de TCC
+# Proposta de Planilha Integra com Criptografia - Projeto de TCC
 
 Com objetivo de produzir uma ferramenta para auxiliar na produção de dados, principalmente quando estão em diferentes fontes, foi desenvolvido o Data Quality
 com Criptografia, para realizar a junção e correção de possíveis erros na tabela, tanto csv ou xlsx. Também com a possibilidade de realizar a criptografia
