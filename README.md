@@ -1,6 +1,6 @@
 # Proposta de Planilha Integra com Criptografia - Projeto de TCC
 
-Com objetivo de produzir uma ferramenta para auxiliar na produção de dados, principalmente quando estão em diferentes fontes, foi desenvolvido o Data Quality
+Com objetivo de produzir uma ferramenta para auxiliar na produção de dados, principalmente quando estão em diferentes fontes, foi desenvolvido o Planilha Integra
 com Criptografia, para realizar a junção e correção de possíveis erros na tabela, tanto csv ou xlsx. Também com a possibilidade de realizar a criptografia
 do arquivo gerado ao fim. Ao final é gerado a chave de criptografia e a possibilidade de descriptografar o arquivo.
 
